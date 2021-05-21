@@ -23,19 +23,15 @@
     // 마커 이미지 관련 변수
     var bad = './bad.png', 
         good = './good.png',
-        soso = './soso.png',
-        size = new kakao.maps.Size(60, 60), 
-        option = {offset: new kakao.maps.Point(27, 69)};
+        soso = './soso.png';
    
-    var function marker(lat, long, what, size, option){
-        var postion = new kakao.maps.LatLng(lat, long),
-            image = new kakao.maps.MarkerImage(what, size, option);
-        return new kakao.maps.Marker({position: position,
-                                      image: image});
-    };
+    var function marker(lat, long, what){
+        var position = new kakao.maps.LatLng(lat, long),
+            image = new kakao.maps.MarkerImage(what, kakao.maps.Size(60, 60),{offset: new kakao.maps.Point(27, 69)});
+        return new kakao.maps.Marker({position: position, image: image});}
     
     //중앙도서관
-    var joongdo = marker(37.45943775683825, 126.95214618421608,good,size,option);
+    var joongdo = marker(37.45943775683825, 126.95214618421608, good};
     joongdo.setMap(map);
     
 </script>
