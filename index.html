@@ -21,9 +21,9 @@
     map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT)
 
     // 마커 이미지 관련 변수
-    var bad = './bad.png',
+    var bad ='./bad.png',
         good = './good.png',
-        soso = './soso.png';
+        soso ='./soso.png';
 
     function position(lat,long){
         return new kakao.maps.LatLng(lat, long);}
@@ -42,6 +42,23 @@
         im1 = new image(good),
         m1 = new marker(p1,im1);
     m1.setMap(map);
+    
+    //
+    var imageSize = new kakao.maps.Size(64, 69), // 마커이미지의 크기입니다
+    imageOption = {offset: new kakao.maps.Point(27, 69)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
+
+    // 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
+    var markerImage = new kakao.maps.MarkerImage(good, imageSize, imageOption),
+    markerPosition = new kakao.maps.LatLng(37.45943775683825, 126.95214618421608); // 마커가 표시될 위치입니다
+
+    // 마커를 생성합니다
+    var marker = new kakao.maps.Marker({
+      position: markerPosition,
+        image: markerImage // 마커이미지 설정 
+        });
+
+// 마커가 지도 위에 표시되도록 설정합니다
+marker.setMap(map);  
 
 </script>
 </body>
