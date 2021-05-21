@@ -25,17 +25,17 @@
         good = './good.png',
         soso = './soso.png';
     
-    var function position(lat,long){
-        return new kakao.maps.LatLng(lat, long);}
+    function position(lat,long){
+        return kakao.maps.LatLng(lat, long);}
     
-    var function image(what){
+    function image(what){
             var imageSrc = what,
                 imageSize = new kakao.maps.Size(60, 60),
                 imageOption = {offset: new kakao.maps.Point(27, 69)};
-            return new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption);}
+            return kakao.maps.MarkerImage(imageSrc, imageSize, imageOption);}
     
     var function marker(image, position){
-        return new kakao.maps.Marker({position: position, image: image});}
+        return kakao.maps.Marker({position: position, image: image});}
     
     //중앙도서관
     var p1 = position(37.45943775683825, 126.95214618421608)
