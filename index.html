@@ -33,32 +33,6 @@
     var zoomControl = new kakao.maps.ZoomControl();
     map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
     
-    // 마커 함수
-    function marker(name, lat,long){
-        var name = new kakao.maps.Marker({
-            map: map, 
-            position: new kakao.maps.LatLng(lat,long)});
-    }
-    
-    // 콘텐츠 함수
-    function content(what, bad, link){ 
-        var content = '<div class="wrap">' + 
-            '    <div class="info">' + 
-            '            <div class="close" onclick="closeOverlay()" title="닫기"></div>' + 
-            '     </div>' + 
-            '     <div class="body">' + 
-            '            <div class="img">' +
-            '                <img src="https://cfile181.uf.daum.net/image/250649365602043421936D" width="73" height="70">' +
-            '           </div>' + 
-            '     <div class="desc">' + 
-            '                <div class="ellipsis">what</div>' +
-            '                <div><a href=link target="_blank" class="link">상세 평가</a></div>' + 
-            '     </div>' + 
-            '        </div>' + 
-            '    </div>' +    
-            '</div>';
-    }
-    
 </script>
 </body>
 </html>
