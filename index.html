@@ -27,10 +27,11 @@
         size = new kakao.maps.Size(60, 60), 
         option = {offset: new kakao.maps.Point(27, 69)};
    
-    var function position(lat, long, what, size, option){
+    var function marker(lat, long, what, size, option){
         var postion = new kakao.maps.LatLng(lat, long),
             image = new kakao.maps.MarkerImage(what, size, option);
-        return new kakao.maps.Marker({position: position,image: image});
+        return new kakao.maps.Marker({position: position,
+                                      image: image});
     };
     
     //중앙도서관
