@@ -48,7 +48,7 @@
     imageOption = {offset: new kakao.maps.Point(27, 69)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
 
     // 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
-    var markerImage = new kakao.maps.MarkerImage(good, imageSize, imageOption),
+    var markerImage = new kakao.maps.MarkerImage('./good.png', imageSize, imageOption),
     markerPosition = new kakao.maps.LatLng(37.45943775683825, 126.95214618421608); // 마커가 표시될 위치입니다
 
     // 마커를 생성합니다
