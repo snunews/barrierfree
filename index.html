@@ -78,7 +78,6 @@
       }
 
     //열고 닫기
-    function closeOverlay(overlay) {overlay.setMap(null);}
     function click(marker,overlay) {return new kakao.maps.event.addListener(marker, 'click', function(overlay) {
             overlay.setMap(map);})}
     
@@ -87,7 +86,7 @@
     joongdo.setMap(map);
     // 콘텐츠 함수
     var joongdooverlay = new overlay(content, joongdo);
-    closeOverlay(joongdoooverlay)
+        function closeOverlay() {joongdooverlay.setMap(null);}
     click(joongdo,joongdooverlay)
     
     //사범대
