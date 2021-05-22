@@ -78,18 +78,17 @@
       }
 
     //열고 닫기
-    function openclose(overlay,marker){
-        kakao.maps.event.addListener(marker, 'click', function() {
-            overlay.setMap(map);});
-        function closeOverlay() {overlay.setMap(null);};
-    }
+    function closeOverlay(overlay) {overlay.setMap(null);}
+    function click(marker,overlay) {return new kakao.maps.event.addListener(marker, 'click', function(overlay) {
+            overlay.setMap(map);})}
     
     //중앙도서관
     var joongdo = new result(37.45943775683825, 126.95214618421608, soso);
     joongdo.setMap(map);
     // 콘텐츠 함수
-    joongdooverlay = new overlay(content, joongdo)
-    openclose(joongdooverlay, joongdo)
+    var joongdooverlay = new overlay(content, joongdo);
+    closeOverlay(joongdoooverlay)
+    click(joongdo,joongdooverlay)
     
     //사범대
     var sabum = new result(37.45971766987394, 126.95474709650235, good);
