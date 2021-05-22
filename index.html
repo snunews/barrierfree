@@ -80,7 +80,7 @@
     }
    
     //중앙도서관
-    var joongdo = new place(37.45943775683825, 126.95214618421608,bad);
+    var joongdo = new place(37.45943775683825, 126.95214618421608,good);
     var joongdooverlay = new generateoverlay(content, marker);
     function closeOverlay(){joongdooverlay.setMap(null);}
     kakao.maps.event.addListener(marker, 'click', function() {joongdooverlay.setMap(map);});
