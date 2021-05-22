@@ -80,34 +80,29 @@
                                             image: MarkerImage
                                            });
         
-        //콘텐츠
-        content = 
-            `<div class="wrap">
-                <div class="info">
-                    <div class="title">${data.title}
-                        <div class="close" onclick="closeOverlay()" title="닫기"></div>
-                    </div>
-                    <div class="body">
-                        <div class="img"><img src="https://cfile181.uf.daum.net/image/250649365602043421936D" width="73" height="70"></div>
-                        <div class="desc"><div class="ellipsis">${data.section}</div>
-                                          <div class="jibun ellipsis">${data.problem}</div>
-                        </div>
-                    </div>
-                </div>
-            </div>`;
-        
         //오버레이
         var overlay = new kakao.maps.CustomOverlay({content: content,
             map: map,
             position: marker.getPosition()
         });
         
+        //콘텐츠
+        var content = document.createElement('div');
+        content.innerHTML =  data.title;
+        content.style.cssText = 'background: white; border: 1px solid black';
+        
+        var closeBtn = document.createElement('button');
+        closeBtn.innerHTML = '닫기';
+        closeBtn.onclick = function () {
+        overlay.setMap(null);
+        };
+        content.appendChild(closeBtn);
+        overlay.setContent(content);
+        
         //오버레이 열리게 하기
         kakao.maps.event.addListener(marker, 'click', function() {overlay.setMap(map);
         });
         
-        //오버레이 닫히게 하기
-        var close = function(){overlay.setMap(null);};
     }
 </script>
 </body>
