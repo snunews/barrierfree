@@ -42,12 +42,13 @@
         soso ='./soso.png';
     
     // 마커 함수
-    function result(lat,long,what){
+    function place(lat,long,what){
         var Markerposition = new kakao.maps.LatLng(lat, long),
         imageSize = new kakao.maps.Size(60, 60),
         imageOption = {offset: new kakao.maps.Point(27, 69)};
-        var MarkerImage = new kakao.maps.MarkerImage(what, imageSize, imageOption);
-        return new kakao.maps.Marker({position: Markerposition, image: MarkerImage})
+        var MarkerImage = new kakao.maps.MarkerImage(what, imageSize, imageOption),
+            marker = new kakao.maps.Marker({position: Markerposition, image: MarkerImage});
+        marker.setMap(map);
     }
     
     // 콘텐츠 함수
@@ -77,18 +78,12 @@
                                         map: map, 
                                         position: marker.getPosition()});
     }
-    // 합쳐서 만들기
-    function place(lat,long, what, content){
-        var marker = new result(lat, long, what);
-        marker.setMap(map);
-        var overlay = new generateoverlay(content, marker);
-    }
    
     //중앙도서관
-    var joongdo = place(37.45943775683825, 126.95214618421608,bad,content);
-    function closeOverlay(){overlay.setMap(null);}
-    function click(){new kakao.maps.event.addListener(marker, 'click', function() {overlay.setMap(map);});}
-    
+    var joongdo = new place(37.45943775683825, 126.95214618421608,bad);
+    var joongdooverlay = new generateoverlay(content, marker);
+    function closeOverlay(){joongdooverlay.setMap(null);}
+    kakao.maps.event.addListener(marker, 'click', function() {joongdooverlay.setMap(map);});
     
     //사범대
     //var sabum = new result(37.45971766987394, 126.95474709650235, good);
