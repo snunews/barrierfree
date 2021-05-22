@@ -82,9 +82,10 @@
         
         //오버레이
         var overlay = new kakao.maps.CustomOverlay({content: content,
-            map: map,
-            position: marker.getPosition()
-        });
+                                                    yAnchor: 3
+                                                    map: map,
+                                                    position: marker.getPosition()
+                                                    });
         
         //콘텐츠
         var content = document.createElement('div');
