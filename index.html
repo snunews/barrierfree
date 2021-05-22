@@ -82,8 +82,6 @@
         var marker = new result(lat, long, what);
         marker.setMap(map);
         var overlay = new generateoverlay(content, marker);
-        function closeOverlay() {overlay.setMap(null);
-                                }
         function click(){new kakao.maps.event.addListener(marker, 'click', function() {overlay.setMap(map);});
                         }
     }
@@ -95,9 +93,6 @@
     var sabum = new result(37.45971766987394, 126.95474709650235, good);
     sabum.setMap(map);
     
-    //오버레이 열고 닫기
-    function closeOverlay() {overlay.setMap(null);}
-    kakao.maps.event.addListener(marker, 'click', function() {overlay.setMap(map);});
 </script>
 </body>
 </html>
