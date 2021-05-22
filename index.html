@@ -80,11 +80,11 @@
     
     // 콘텐츠 함수
     function place(lat, long, what,content){
-        var marker = new result(lat, long, what);
-        marker.setMap(map);
-        var overlay = new overlay(content, marker);
+        var marker = new result(lat, long, what),
+            overlay = new overlay(content, marker);
         function closeOverlay() {overlay.setMap(null);}
-        new kakao.maps.event.addListener(marker, 'click', function(overlay) {overlay.setMap(map);})};
+        new kakao.maps.event.addListener(marker, 'click', function() {overlay.setMap(map);});
+        marker.setMap(map);
     }
    
     //중앙도서관
