@@ -70,28 +70,30 @@
             '    </div>' +    
             '</div>';
         
-      // 오버레이 만들기
-      function overlay(content, marker){
-          return new kakao.maps.CustomOverlay({content: content, 
+    
+    // 오버레이 만들기
+    function overlay(content, marker){
+        return new kakao.maps.CustomOverlay({content: content, 
                                         map: map, 
                                         position: marker.getPosition()});
-      }
-
-    //열고 닫기
-    function click(marker,overlay) {return new kakao.maps.event.addListener(marker, 'click', function(overlay) {
-            overlay.setMap(map);})}
+    }
     
-    //중앙도서관
-    var joongdo = new result(37.45943775683825, 126.95214618421608, soso);
-    joongdo.setMap(map);
     // 콘텐츠 함수
-    var joongdooverlay = new overlay(content, joongdo);
-        function closeOverlay() {joongdooverlay.setMap(null);}
-    click(joongdo,joongdooverlay)
+    function place(lat, long, what,content){
+        var marker = new result(lat, long, what);
+        marker.setMap(map);
+        var overlay = new overlay(content, marker);
+        function closeOverlay() {overlay.setMap(null);}
+        new kakao.maps.event.addListener(marker, 'click', function(overlay) {overlay.setMap(map);})};
+    }
+   
+    //중앙도서관
+    place(37.45943775683825, 126.95214618421608,soso,content);
     
     //사범대
     var sabum = new result(37.45971766987394, 126.95474709650235, good);
     sabum.setMap(map);
+    
     
 </script>
 </body>
