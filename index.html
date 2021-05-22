@@ -35,6 +35,13 @@
     // 줌 컨트롤
     var zoomControl = new kakao.maps.ZoomControl();
     map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT)
+    
+    //장소 목록
+    var places =[
+        {content: <div>중앙도서관</div>,
+         latlng: new kakao.maps.LatLng(lat, long),
+        
+         
 
     // 마커 선택지
     var bad ='./bad.png',
@@ -72,18 +79,9 @@
             '</div>';
         
     // 오버레이 만들기
-    var overlay = null;
     function make(lat, long, what, content){
         var marker = new place(lat, long, what),
-        function() {
-            if (overlay !== null) {
-                overlay.setMap(null);
-            }
-            overlay = new kakao.maps.CustomOverlay({content: content, 
-                                        map: map, 
-                                        position: marker.getPosition()
-                                                   });
-        }
+            overlay = new kakao.maps.CustomOverlay({content: content, map: map, position: marker.getPosition()});
         kakao.maps.event.addListener(marker, 'click', function() {overlay.setMap(map);});
     }
    
