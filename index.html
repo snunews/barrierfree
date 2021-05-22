@@ -72,23 +72,23 @@
         
     
     // 오버레이 만들기
-    function overlay(content, marker){
-        return new kakao.maps.CustomOverlay({content: content, 
+    function generateoverlay(content, marker){
+        new kakao.maps.CustomOverlay({content: content, 
                                         map: map, 
                                         position: marker.getPosition()});
     }
     
     // 콘텐츠 함수
-    function place(lat, long, what,content){
-        var marker = new result(lat, long, what),
-            overlay = new overlay(content, marker);
+    function place(marker,content){
+        var overlay = new generateoverlay(content, marker);
         function closeOverlay() {overlay.setMap(null);}
-        new kakao.maps.event.addListener(marker, 'click', function() {overlay.setMap(map);});
-        marker.setMap(map);
+        function click(){new kakao.maps.event.addListener(marker, 'click', function() {overlay.setMap(map);});}
     }
    
     //중앙도서관
-    place(37.45943775683825, 126.95214618421608,soso,content);
+    var joongdo = new result(37.45943775683825, 126.95214618421608,soso);
+    joongdo.setMap(map);
+    place(joongdo,content);
     
     //사범대
     var sabum = new result(37.45971766987394, 126.95474709650235, good);
