@@ -82,18 +82,17 @@
         var marker = new result(lat, long, what);
         marker.setMap(map);
         var overlay = new generateoverlay(content, marker);
-        function closeOverlay(){overlay.setMap(null);
-                               }
-        function click(){new kakao.maps.event.addListener(marker, 'click', function() {overlay.setMap(map);});
-                        }
     }
    
     //중앙도서관
     var joongdo = place(37.45943775683825, 126.95214618421608,bad,content);
+    function closeOverlay(){overlay.setMap(null);}
+    function click(){new kakao.maps.event.addListener(marker, 'click', function() {overlay.setMap(map);});}
+    
     
     //사범대
-    var sabum = new result(37.45971766987394, 126.95474709650235, good);
-    sabum.setMap(map);
+    //var sabum = new result(37.45971766987394, 126.95474709650235, good);
+    //sabum.setMap(map);
     
 </script>
 </body>
