@@ -3,17 +3,6 @@
     <meta charset="utf-8">
     <title>배리어프리지도</title>
     <style>
-        .wrap {position: absolute;left: 0;bottom: 40px;width: 288px;height: 132px;margin-left: -144px;text-align: left;overflow: hidden;font-size: 12px;font-family: 'Malgun Gothic', dotum, '돋움', sans-serif;line-height: 1.5;}
-        .wrap * {padding: 0;margin: 0;}
-        .wrap .info {width: 286px;height: 120px;border-radius: 5px;border-bottom: 2px solid #ccc;border-right: 1px solid #ccc;overflow: hidden;background: #fff;}
-        .wrap .info:nth-child(1) {border: 0;box-shadow: 0px 1px 2px #888;}
-        .info .title {padding: 5px 0 0 10px;height: 30px;background: #eee;border-bottom: 1px solid #ddd;font-size: 18px;font-weight: bold;}
-        .info .body {position: relative;overflow: hidden;}
-        .info .desc {position: relative;margin: 13px 0 0 90px;height: 75px;}
-        .desc .ellipsis {overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
-        .desc .jibun {font-size: 11px;color: #888;margin-top: -2px;}
-        .info .img {position: absolute;top: 6px;left: 5px;width: 73px;height: 71px;border: 1px solid #ddd;color: #888;overflow: hidden;}
-        .info:after {content: '';position: absolute;margin-left: -12px;left: 50%;bottom: 0;width: 22px;height: 12px;background: url('./box.png')}
     </style>
 </head>
 
@@ -21,17 +10,71 @@
 <div id="map" style="width:100%;height:100%;"></div>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=eaacd85667b547236237eafb8ba8244a"></script>
 <script>
+    // 지도 중심 좌표 선정하기
+    var library =   new kakao.maps.LatLng(37.459494, 126.952222);
+    
+    // 지도 만들기
     var mapContainer = document.getElementById('map'), // 지도를 표시할 div
         mapOption = {
-            center: new kakao.maps.LatLng(37.459494, 126.952222), // 지도의 중심좌표
+            center: library, // 지도의 중심좌표
             level: 5 // 지도의 확대 레벨
         };
-    // 지도 생성
     var map = new kakao.maps.Map(mapContainer, mapOption);
 
     // 줌 컨트롤
     var zoomControl = new kakao.maps.ZoomControl();
     map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT)
+    
+    // 현위치 표시
+    
+    // geolocation 사용 가능한 경우
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+            
+        var lat = position.coords.latitude, // 위도
+            lon = position.coords.longitude; // 경도
+            
+        if (37.446583<lat<37.469271) && (126.947474<lon<126.961250){
+            var message = '<div style="padding:5px;">관악캠퍼스에 계시는 군요. 배리어프리 설문조사를 시작해볼까요?</div>',
+                locPosition = new kakao.maps.LatLng(lat, lon); //현위치 받아오기
+            }
+        else {
+            var message = '<div style="padding:5px;">캠퍼스에 계시지 않네요. 결과만 볼까요?</div>',
+                locPosition = library;
+        }
+        displayMarker(locPosition, message);
+    }
+    
+    //geolocation 사용 어려운 경우
+    else { // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
+        var locPosition = library,
+        message = '현위치를 사용할 수 없어요',
+        displayMarker(locPosition, message);
+    }
+    
+    // 마커와 인포윈도우 생성
+    function displayMarker(locPosition, message) {
+        
+        // 마커를 생성
+        var marker = new kakao.maps.Marker({  
+        map: map, 
+        position: locPosition
+        });
+        
+        // 인포윈도우 생성
+        var iwContent = message, // 인포윈도우에 표시할 내용
+        iwRemoveable = true;
+        var infowindow = new kakao.maps.InfoWindow({
+        content : iwContent,
+        removable : iwRemoveable
+        });
+    
+    // 인포윈도우를 마커위에 표시합니다 
+    infowindow.open(map, marker);
+    
+    // 지도 중심좌표를 접속위치로 변경합니다
+    map.setCenter(locPosition);
+    }    
 
     // 마커 선택지
     var bad ='./bad.png',
