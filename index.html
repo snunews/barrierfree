@@ -1,158 +1,47 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>배리어프리지도</title>
-    <style>
-    </style>
+    <title>대학신문 조사 영역</title>
 </head>
-
 <body>
 <div id="map" style="width:100%;height:100%;"></div>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=eaacd85667b547236237eafb8ba8244a"></script>
 <script>
-    // 지도 중심 좌표 선정하기
-    var library =   new kakao.maps.LatLng(37.459494, 126.952222);
-    
     // 지도 만들기
-    var mapContainer = document.getElementById('map'), // 지도를 표시할 div
+    var mapContainer = document.getElementById('map'),// 지도 표시할 영역
         mapOption = {
-            center: library, // 지도의 중심좌표
-            level: 5 // 지도의 확대 레벨
+            center: new kakao.maps.LatLng(37.459494, 126.952222), // 지도의 중심좌표
+            level: 3 // 지도의 확대 레벨
         };
     var map = new kakao.maps.Map(mapContainer, mapOption);
 
-    // 줌 컨트롤
-    var zoomControl = new kakao.maps.ZoomControl();
-    map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT)
+    // 지도 줌 컨트롤
+    var zoomControl = new kakao.maps.ZoomControl(); // 지도 줌 컨트롤하기
+    map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
     
-    // 현위치 표시
+    // 타입
+    var good = './',
+        soso = ,
+        bad=;
     
-    // geolocation 사용 가능한 경우
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(function(position) {
-            
-        var lat = position.coords.latitude, // 위도
-            lon = position.coords.longitude; // 경도
-            
-        if (37.446583<lat<37.469271) && (126.947474<lon<126.961250){
-            var message = '<div style="padding:5px;">관악캠퍼스에 계시는 군요. 배리어프리 설문조사를 시작해볼까요?</div>',
-                locPosition = new kakao.maps.LatLng(lat, lon); //현위치 받아오기
-            }
-        else {
-            var message = '<div style="padding:5px;">캠퍼스에 계시지 않네요. 결과만 볼까요?</div>',
-                locPosition = library;
-        }
-        displayMarker(locPosition, message);
+    
+    // 장소리스트
+    var places;
+    places = [];
+
+    // 마커 만드는 함수
+    function displayMarker(b){
+        var imageSize = new kakao.maps.Size(30, 30),
+            imageSrc = b.type;
+        var marker = new kakao.maps.Marker({
+            position: b.latlng,
+            image: new kakao.maps.MarkerImage(imageSrc, imageSize)});
+        marker.setMap(map)
     }
+
+    // 마커 반복문 걸어주기
+    places.forEach(item => {displayMarker(item);});
     
-    //geolocation 사용 어려운 경우
-    else { // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
-        var locPosition = library,
-        message = '현위치를 사용할 수 없어요',
-        displayMarker(locPosition, message);
-    }
-    
-    // 마커와 인포윈도우 생성
-    function displayMarker(locPosition, message) {
-        
-        // 마커를 생성
-        var marker = new kakao.maps.Marker({  
-        map: map, 
-        position: locPosition
-        });
-        
-        // 인포윈도우 생성
-        var iwContent = message, // 인포윈도우에 표시할 내용
-        iwRemoveable = true;
-        var infowindow = new kakao.maps.InfoWindow({
-        content : iwContent,
-        removable : iwRemoveable
-        });
-    
-    // 인포윈도우를 마커위에 표시합니다 
-    infowindow.open(map, marker);
-    
-    // 지도 중심좌표를 접속위치로 변경합니다
-    map.setCenter(locPosition);
-    }    
-
-    // 마커 선택지
-    var bad ='./bad.png',
-        good = './good.png',
-        soso ='./soso.png';
-
-    //마커커스텀
-    var imageSize = new kakao.maps.Size(60, 60),
-        imageOption = {offset: new kakao.maps.Point(27, 69)};
-
-    //장소 목록
-    var places =[
-        {
-            title: '중앙도서관',
-            section: '화장실',
-            probelm : '문이 무거움',
-            latlng: new kakao.maps.LatLng(37.45943775683825, 126.95214618421608),
-            what: bad
-        },
-        {
-            title: '사범대 11동',
-            section :'출입구',
-            problem : '경사로에 손잡이 없음',
-            latlng: new kakao.maps.LatLng(37.45971766987394, 126.95474709650235),
-            what: good
-        }
-    ];
-
-    // 반복문 걸기
-    for(let i=0; i < places.length; i++){
-        var data = places[i];
-        displayMarker(data);}
-
-    // 마커와 오버레이
-    function displayMarker(data) {
-        //마커
-        var MarkerImage = new kakao.maps.MarkerImage(data.what, imageSize, imageOption),
-            marker = new kakao.maps.Marker({map: map,
-                position: data.latlng,
-                image: MarkerImage
-            });
-
-        //콘텐츠
-        var content = '<div class="wrap">' +
-            '<div class="info">' +
-            '<div class="title">' + data.title +'</div>' +
-            '<div class="body">' +
-            '<div class="img">' +
-            '<img src="https://cfile181.uf.daum.net/image/250649365602043421936D" width="73" height="70">' +
-            '</div>' +
-            '<div class="desc">' +
-            '<div class="ellipsis">'+ data.section +'</div>' +
-            '<div class="jibun ellipsis">'+data.problem +'</div>' +
-            '</div>' +
-            '</div>' +
-            '</div>' +
-            '</div>';
-        
-        //오버레이
-        var overlay = new kakao.maps.CustomOverlay({content: content,
-            yAnchor: 3,
-            map: map,
-            position: marker.getPosition()
-        });
-
-        var closeBtn = document.createElement('button');
-        closeBtn.innerHTML = '닫기';
-        closeBtn.onclick = function () {
-            overlay.setMap(null);
-        };
-        content.appendChild(closeBtn);
-        overlay.setContent(content);
-
-        //오버레이 열리게 하기
-        kakao.maps.event.addListener(marker, 'click', function() {overlay.setMap(map);
-        });
-
-    }
 </script>
 </body>
 </html>
