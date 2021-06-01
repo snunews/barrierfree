@@ -87,14 +87,11 @@ searchPlaces();
 // 관악캠퍼스 리스트에서 들고 오기
 function searchPlaces() {
         var keyword = document.getElementById('keyword').value;
-        let listInner = document.getElementsByClassName("listInner");
 
         for (let i = 0; i < listInner.length; i++) {
-          city = listInner[i].getElementsByClassName("city");
-          country = listInner[i].getElementsByClassName("country");
-          if (city[0].innerHTML.toLowerCase().indexOf(search) != -1 ||
-            country[0].innerHTML.toLowerCase().indexOf(search) != -1
-          ) {
+             var exact = places[i].exact,
+                 category = places[i].category;
+          if (exat.indexOf(keyword) != -1 || category.indexOf(keyword) != -1) {
             displayPlaces(data);
             displayPagination(pagination);                                                     
           } else {
