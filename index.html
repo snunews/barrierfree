@@ -140,44 +140,47 @@
             latlng: new kakao.maps.LatLng(37.45461774184041, 126.95142591352925),
             title: '39'
         }
-    ];
-                                                                                                                                                                                                                                                             
+    ];                                                                                                                           
+                                                                                                                                
 for (var i = 0; i < positions.length; i ++) {
     // 마커를 생성합니다
     var marker = new kakao.maps.Marker({
         map: map, // 마커를 표시할 지도
         position: positions[i].latlng, // 마커의 위치
         image: new kakao.maps.MarkerImage(snu,new kakao.maps.Size(64, 69), {offset: new kakao.maps.Point(27, 69)})                                                                                                                 
-    });
-
-    var content = '<div class="wrap">' + 
-            '    <div class="info">' + 
-            '        <div class="title">' + 
-                     positions[i].title +                 
-            '        </div>' + 
-            '        <div class="body">' + 
-            '           <div class="img">' +
-            '                <img src="https://cfile181.uf.daum.net/image/250649365602043421936D" width="73" height="70">' +
-            '           </div>' + 
-            '           <div class="desc">' + 
-            '                <div class="ellipsis">' + positions[i].title + '</div>' + 
-            '           </div>' + 
-            '        </div>' + 
-            '    </div>' +    
-            '</div>';                                                                                                                               
-                                                                                                                                
-    // 마커에 표시할 인포윈도우를 생성합니다 
+    });                                                                                                                             
+  }                                              
+    
+(function(marker, place) {
+  // 마크 클릭 시
+  kakao.maps.event.addListener(marker, 'click', function() {
     var overlay = new kakao.maps.CustomOverlay({
-    content: content,
-    map: map,
-    position: positions[i].latlng      
-    });                                                                                                                            
-                                                                                                                              
-    // 이벤트 리스너로는 클로저를 만들어 등록합니다 
-    kakao.maps.event.addListener(marker, 'mouseover', function() {overlay.setMap(map);});
-    kakao.maps.event.addListener(marker, 'mouseout', function() {overlay.setMap(null);});
-    } 
-                                                                                                                                                    
+      // 오버레이에 띄울 내용
+      content: '<div class="wrap">' +
+            '    <div class="info">' +
+            '        <div class="title">' +
+            place.title +
+            '        </div>' +
+            '        <div class="body">' +
+            '            <div class="desc">' +
+            '                <div class="ellipsis">' + place.addr1 + '</div>' +
+            '		       <div class="jibun ellipsis">' + place.tel + '</div>' +
+            '            </div>' +
+            '        </div>' +
+            '    </div>' +
+            '</div>',
+      map: map,
+      position: marker.getPosition()
+    });
+    // 아무데나 클릭하게되면 overlay를 끄기
+    kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
+      overlay.setMap(null)
+    })
+    console.log(overlay);
+    overlay.setMap(map);
+  })
+})(marker, positions[i])                                                  
+                                                                                                   
 </script>
 </body>
 </html>
