@@ -41,60 +41,28 @@
     // 조사 장소 걸기
     var positions = [
         {
-            latlng: new kakao.maps.LatLng(37.46736367253729, 126.95352932906027),
-            title: '85'
-        },
-        {
-            latlng: new kakao.maps.LatLng(37.46746585818763, 126.95238134365215),
-            title: '71'
-        },
-        {
             latlng : new kakao.maps.LatLng(37.46656707304553, 126.95221255883665),
-            title: '153'
-        },
-        {
-            latlng : new kakao.maps.LatLng(37.46350314298509, 126.95315397603645),
-            title: '52'
-        },
-        {
-            latlng : new kakao.maps.LatLng(37.46354785153285, 126.95265508516769),
-            title: '51'
-        },
-        {
-            latlng : new kakao.maps.LatLng(37.462666449512845, 126.95336855275391),
-            title: '54'
-        },
-        {
-            latlng : new kakao.maps.LatLng(37.46243438783375, 126.95287234409413),
-            title: '55'
-        },
-        {
-            latlng : new kakao.maps.LatLng(37.459753537321355, 126.95521003587739),
-            title: '11'
-        },
-        {
-            latlng : new kakao.maps.LatLng(37.45968540653666, 126.95479429349079),
-            title: '12'
-        },
+            title: '153동'
+            content : '주출입문 문이 밀어서 열기에 무거움'
+            image: './heavydoor.jpg'
+        },                                                                                                                        
         {
             latlng : new kakao.maps.LatLng(37.46014315902149, 126.953992312999),
-            title: '8'
-        },
-        {
-            latlng : new kakao.maps.LatLng(37.460760588159, 126.9545099793339),
-            title: '6'
-        },
-        {
-            latlng : new kakao.maps.LatLng(37.46088194432473, 126.95328689203596),
-            title: '4'
+            title: '8동'
+            content: '바닥 미끌거리며 계단 안전 미흡함'
+            image: './safe.jpg'                                                                                                                    
         },
         {
             latlng : new kakao.maps.LatLng(37.45923989320019, 126.95216600949391),
             title: '중앙도서관'
+            content: '장애 화장실 매우 좁음'                                                                                                                    
+            image: './narrow.jpg'                                                                                                                    
         },
         {
             latlng : new kakao.maps.LatLng(37.45891201100587, 126.95256565863072),
-            title: '관정도서관'
+            title: '관정도서관',
+            content: '장애학생 책상 사용할 수 없음',
+            image: './desk.jpg'                                                                                                                    
         },
         {
             latlng : new kakao.maps.LatLng(37.45937189731858, 126.95062642152045),
@@ -102,43 +70,9 @@
         },
         {
             latlng : new kakao.maps.LatLng(37.4594698357011, 126.94985930974767),
-            title: '24'
-        },
-        {
-            latlng : new kakao.maps.LatLng(37.45917664347052, 126.94814225480354),
-            title: '500'
-        },
-        {
-            latlng : new kakao.maps.LatLng(37.45768277717114, 126.94852957039596),
-            title: '200'
-        },
-        {
-            latlng : new kakao.maps.LatLng(37.45610736945044, 126.95362339487167),
-            title: '29'
-        },
-        {
-            latlng : new kakao.maps.LatLng(37.4566779901127, 126.95137033936211),
-            title: '43-1'
-        },
-        {
-            latlng : new kakao.maps.LatLng(37.45808748966128, 126.9499541330274),
-            title: '27'
-        },
-        {
-            latlng : new kakao.maps.LatLng(37.44885995058869, 126.95250658375697),
-            title: '302'
-        },
-        {
-            latlng : new kakao.maps.LatLng(37.45018902094621, 126.9524048302891),
-            title: '301'
-        },
-        {
-            latlng : new kakao.maps.LatLng(37.45431113179181, 126.95211792342481),
-            title: '135'
-        },
-        {
-            latlng: new kakao.maps.LatLng(37.45461774184041, 126.95142591352925),
-            title: '39'
+            title: '7동'
+            content: '시설은 배리어프리하게 리모델링 되었으나 소화전으로 화장실을 막아 둠'
+            image: './fire.jpg'                                                                                                                    
         }
     ];                                                                                                                           
                                                                                                                                 
@@ -163,10 +97,10 @@ for (var i = 0; i < positions.length; i ++) {
             '        </div>' + 
             '        <div class="body">' + 
             '            <div class="img">' +
-            '                <img src="https://cfile181.uf.daum.net/image/250649365602043421936D" width="73" height="70">' +
+            '                <img src=' + place.image + '>' +
             '           </div>' + 
             '            <div class="desc">' + 
-            '                <div class="ellipsis">'+ place.title + '</div>' +  
+            '                <div class="ellipsis">'+ place.content + '</div>' +  
             '            </div>' + 
             '        </div>' + 
             '    </div>' +    
