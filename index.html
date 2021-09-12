@@ -136,6 +136,7 @@ for (var i = 0; i < positions.length; i ++) {
     var marker = new kakao.maps.Marker({
         map: map, // 마커를 표시할 지도
         position: positions[i].latlng // 마커의 위치
+        image: new kakao.maps.MarkerImage(snu, new kakao.maps.Size(64, 69), {offset: new kakao.maps.Point(27, 69)})                                                                                                                        
     });
 
     // 마커에 표시할 인포윈도우를 생성합니다 
