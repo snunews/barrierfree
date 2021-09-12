@@ -156,19 +156,22 @@ for (var i = 0; i < positions.length; i ++) {
   kakao.maps.event.addListener(marker, 'click', function() {
     var overlay = new kakao.maps.CustomOverlay({
       // 오버레이에 띄울 내용
-      content: '<div class="wrap">' +
-            '    <div class="info">' +
-            '        <div class="title">' +
-            place.title +
-            '        </div>' +
-            '        <div class="body">' +
-            '            <div class="desc">' +
-            '                <div class="ellipsis">' + place.addr1 + '</div>' +
-            '		       <div class="jibun ellipsis">' + place.tel + '</div>' +
-            '            </div>' +
-            '        </div>' +
-            '    </div>' +
-            '</div>',
+      content:'<div class="wrap">' + 
+            '    <div class="info">' + 
+            '        <div class="title">' + 
+            place.title + 
+            '            <div class="close" onclick="closeOverlay()" title="닫기"></div>' + 
+            '        </div>' + 
+            '        <div class="body">' + 
+            '            <div class="img">' +
+            '                <img src="https://cfile181.uf.daum.net/image/250649365602043421936D" width="73" height="70">' +
+            '           </div>' + 
+            '            <div class="desc">' + 
+            '                <div class="ellipsis">'+ place.title + '</div>' +  
+            '            </div>' + 
+            '        </div>' + 
+            '    </div>' +    
+            '</div>';
       map: map,
       position: marker.getPosition()
     });
