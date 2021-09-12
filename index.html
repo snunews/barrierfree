@@ -11,7 +11,7 @@
     .info .body {position: relative;overflow: hidden;}
     .info .desc {position: relative;margin: 13px 0 0 90px;height: 75px;}
     .desc .ellipsis {overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
-    .info .img {position: absolute;top: 6px;left: 5px;width: 73px;height: 71px;border: 1px solid #ddd;color: #888;overflow: hidden;}
+    .info .img {position: absolute;top: 6px;left: 5px;width: 73px;height: 71px;object-fit: cover;border: 1px solid #ddd;color: #888;overflow: hidden;}
     .info:after {content: '';position: absolute;margin-left: -12px;left: 50%;bottom: 0;width: 22px;height: 12px;background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')}
     .info .link {color: #5085BB;}
 </style>
@@ -67,7 +67,7 @@
         {
             latlng : new kakao.maps.LatLng(37.4594698357011, 126.94985930974767),
             title: '7동',
-            content: '시설은 배리어프리하게 리모델링 되었으나 소화전으로 화장실을 막아 둠',
+            content: '소화전으로 화장실을 막아 둠',
             image: './fire.jpg'                                                                                                                    
         }
     ];                                                                                                                           
@@ -93,7 +93,7 @@ for (var i = 0; i < positions.length; i ++) {
             '        </div>' + 
             '        <div class="body">' + 
             '            <div class="img">' +
-            '                <img src=' + place.image + 'style="max-width: 100%; height: auto;">' +
+            '                <img src=' + place.image + '>' +
             '           </div>' + 
             '            <div class="desc">' + 
             '                <div class="ellipsis">'+ place.content + '</div>' +  
